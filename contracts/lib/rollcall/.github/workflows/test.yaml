@@ -1,0 +1,24 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cargo
+          key: ${{ runner.os }}-${{ env.FOUNDRY_VERSION }}
+      - uses: onbjerg/foundry-toolchain@v1
+        with:
+          version: nightly
+      - run: forge test --force -vvv
