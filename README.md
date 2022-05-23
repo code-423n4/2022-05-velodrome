@@ -41,7 +41,9 @@
 ### New Formula
   
   The only new formula we introduce is for the emissions schedule:
+
   $\frac{1}{2} * weekly * (\frac{veTotal}{veloTotal})^3$
+
   where
 
   $veTotal$ is the total locked supply of VELO and
