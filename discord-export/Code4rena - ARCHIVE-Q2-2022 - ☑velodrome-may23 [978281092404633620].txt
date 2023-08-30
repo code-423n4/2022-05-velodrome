@@ -1,0 +1,369 @@
+==============================================================
+Guild: Code4rena
+Channel: ARCHIVE-Q2-2022 / ☑velodrome-may23
+==============================================================
+
+[05/23/2022 1:22 PM] itsmetechjay
+👋 Hello and welcome to the contest channel for the $75K USDC **Velodrome Finance **contest!
+
+📆 Contest opens May 23, 2022 at 20:00 UTC and runs through May 30, 2022 at 19:59 UTC (7 days).
+
+Please give a warm welcome to the Velodrome Finance team, particularly @jimmyx0x, who will be available for questions either here in the channel or via DM.
+
+We'll be posting relevant links, documentation, etc. here, so if you intend to participate in this contest, consider enabling notifications for this channel. 🐺 ⏰
+
+Contest Page: https://code4rena.com/contests/2022-05-velodrome-finance-contest
+
+{Embed}
+https://code4rena.com/contests/2022-05-velodrome-finance-contest
+Code4rena Velodrome Finance contest
+$75,000 USDC
+23 May 2022—30 May 2022
+Code4rena - ARCHIVE-Q2-2022 - ☑velodrome-may23 [978281092404633620].txt_Files/C4-banner-7C19B.png
+
+{Reactions}
+🎉 (10) 
+
+[05/23/2022 8:17 PM] pooltypes#9360
+Hello everyone! I'm Pool, the lead Solidity dev for Velodrome. We're building a base layer AMM on Optimism that's inspired by Solidly.
+
+As we're not changing any of the core swap logic, the bulk of our security concerns relate to the native token emissions, governance, and distribution:
+
+Gauge.sol and Bribe.sol, which introduce new logic related to how external bribes and voting work
+VotingEscrow.sol, which adds compatibility with OZ/Comp-style governance tools like Tally
+RedemptionSender.sol and RedemptionReceiver.sol which both use LayerZero for cross-chain messaging
+
+Appreciate any and all feedback, and please don't hesitate to reach out here or via DM if you have any questions about the codebase!
+
+{Reactions}
+hi5 (7) 
+
+[05/24/2022 3:34 AM] 0x4non
+I keep having some failures in these tests (just clone the repo and run the install and readme):
+```
+Failed tests:
+[FAIL. Reason: cannot claim during votes period] testGaugeClaimRewards3() (gas: 62513230)
+[FAIL. Reason: Revert] testClaimReward2Owner1() (gas: 26410758
+```
+
+
+[05/24/2022 4:20 AM] rotcivegaf
+👍
+
+
+[05/24/2022 8:26 PM] pooltypes#9360
+Hey! Yes, those tests are failing.. With our test suite we transpiled Andre's Solidly tests (written in JS/Hardhat) to Solidity for Foundry. The tests aren't 1-1 since Foundry and Hardhat simulate changes in block timestamps differently so some small modifications have been made.
+
+The issues in those tests specifically are from our most recent changes in Gauge.sol and Bribe.sol, the tests for those aren't updated yet in the commit we sent C4. Not sure if the code freeze applies to tests, maybe @Jay | C4 can shed light on that?
+
+
+[05/24/2022 8:31 PM] itsmetechjay
+Changes to the tests are not a part of the code freeze, so you can apply those updates.
+
+
+[05/24/2022 8:31 PM] pooltypes#9360
+Amazing, will try to get those changes out ASAP for y'all. Thank you for bringing it up!
+
+{Reactions}
+thankyou (2) 
+
+[05/25/2022 1:21 AM] levx.eth
+What are the specific breakdown of the prizes for severities?
+
+
+[05/25/2022 1:23 AM] 100proof
+@LevX Perhaps you're looking for this? https://docs.code4rena.com/roles/wardens/judging-criteria. This criteria holds for all C4 contests.
+
+
+[05/25/2022 1:25 AM] 100proof
+@LevX My apologies. I meant to send you this link: https://docs.code4rena.com/incentive-model-and-awards
+
+{Reactions}
+👍 thankyou 
+
+[05/25/2022 1:36 AM] 100proof
+It's a really interesting system where you are rewarded 10 vs 3 vs 1 for High/Medium/Low and you are rewarded for _uniqueness_ of findings.
+
+
+[05/25/2022 1:58 AM] levx.eth
+Thank you
+
+
+[05/25/2022 5:01 PM] rotcivegaf
+@jimmyx0x, I cant send you a DM to you
+
+
+[05/25/2022 5:04 PM] jimmyx0x
+Added!
+
+{Reactions}
+👍 
+
+[05/25/2022 5:54 PM] dmitriia
+Hey, the same, if you don't mind
+
+
+[05/25/2022 7:05 PM] jimmyx0x
+Added!
+
+{Reactions}
+👍 
+
+[05/26/2022 10:22 PM] hake_stake
+same here pls
+
+{Reactions}
+💯 
+
+[05/27/2022 5:59 AM] calabashsquash
+I've never had this on other projects before, but when running `forge test`, literally nothing happens lol.
+As in, it just outputs nothing except for `No files changed, compilation skipped`.
+
+Full output below:
+```
+computer@computer:~/path/to/2022-05-velodrome/contracts$ forge test
+[⠆] Compiling...
+No files changed, compilation skipped
+computer@computer:~/path/to/2022-05-velodrome/contracts$
+```
+Are there any forge/foundry gurus able to help me troubleshoot this? I assume it's nothing to do with this repo, as I haven't seen any similar messages
+
+
+[05/27/2022 1:52 PM] _t1nt1n
+@CalabashSquash weird thing happened to me before was that I had a globally installed npm module `electron-forge` which unfortunately uses the same command and it was in path
+
+
+[05/27/2022 1:53 PM] _t1nt1n
+so maybe if you've done work w/ electron in the past you might have that issue, also you can check the version like forge -v or something and see if it lines up with foundry/forge
+
+
+[05/27/2022 4:39 PM] pooltypes#9360
+This is weird.. Maybe try `--force`? Also if the artifacts are already built then there won't be a compilation (but I know you're saying that it's from a fresh start)
+
+
+[05/27/2022 5:22 PM] horsefacts
+Yeah, I've had this happen from time to time after compiling, (`forge clean` usually fixes it), but never from a fresh start. If you're still stuck, the support Telegram here can probably help: https://t.me/foundry_support
+
+
+[05/27/2022 9:20 PM] hake_stake
+@pooltypes  please check dm 🙂
+
+
+[05/27/2022 9:26 PM] calabashsquash
+@pooltypes @horsefacts @tintin 
+
+Thanks for the responses :D 
+
+This actually isn't from a fresh start. Contracts all compiled successfully beforehand. My main issue is tests are not running, and seemingly not even attempting to be run.
+
+
+[05/27/2022 9:54 PM] p_crypt0
+@jimmyx0x pls add friend, have question
+
+{Reactions}
+💯 
+
+[05/27/2022 11:50 PM] hack3r_0m
+you can test with `RUST_BACKTRACE=1 forge test` flag to check the root cause
+
+
+[05/28/2022 12:06 AM] calabashsquash
+I get the exact same output 😳 
+```
+name@computer:~/path/to/2022-05-velodrome/contracts$ RUST_BACKTRACE=1 forge test
+[⠢] Compiling...
+No files changed, compilation skipped
+name@computer:~/path/to/2022-05-velodrome/contracts$ 
+```
+
+
+[05/28/2022 12:07 AM] calabashsquash
+When I run `forge clean && forge test` it successfully compiles, but does nothing afterwards. That is to say it only compiles and doesn't run the tests.
+
+
+[05/28/2022 12:42 AM] calabashsquash
+`foundryup` also wasn't doing anything. Not sure what was going on but hard  reinstalling everything from scratch worked
+
+
+[05/28/2022 5:08 AM] levx.eth
+when could I get the feedback on the issue that I submitted?
+
+
+[05/28/2022 5:08 AM] levx.eth
+i thought the email will be sent to me after submission but I didn't receive it
+
+
+[05/28/2022 5:09 AM] 100proof
+@LevX The only way we receive feedback on issues we submitted is when the report is released and the Findings repo is released. This can take well over a month, sometimes longer. There is a new certified+ wardens program that will allow people who formally identify themselves to see the issues repository immediately after the contest ends.
+
+
+[05/28/2022 5:10 AM] 100proof
+When we submit an issue during a contest all we get back is an email with a copy of the issue we submitted, nothing more.
+
+
+[05/28/2022 5:19 AM] levx.eth
+thank you
+
+
+[05/28/2022 5:20 AM] levx.eth
+what's the criteria for being a certified+?
+
+
+[05/28/2022 5:23 AM] 100proof
+I've answered that in #wardens
+
+
+[05/28/2022 10:39 PM] acegawd
+DM @jimmyx0x
+
+
+[05/28/2022 10:49 PM] jimmyx0x
+sent FR
+
+
+[05/29/2022 5:14 PM] pooltypes#9360
+Hi friends, wanted to link a diff report that one of our team members put together: https://gist.github.com/stas/6611bbd3866e1873b09919f5bf0d3b37
+
+{Embed}
+https://gist.github.com/stas/6611bbd3866e1873b09919f5bf0d3b37
+Velodrome (C4) vs Solidly Diff
+Velodrome (C4) vs Solidly Diff . GitHub Gist: instantly share code, notes, and snippets.
+Code4rena - ARCHIVE-Q2-2022 - ☑velodrome-may23 [978281092404633620].txt_Files/gist-og-image-17482.png
+
+{Reactions}
+🔥 (5) thankyou 
+
+[05/29/2022 5:15 PM] pooltypes#9360
+The report shows the main differences between our code and Solidly's (modified so that the file structure is closer to ours)
+
+
+[05/29/2022 5:15 PM] pooltypes#9360
+Hope it's helpful during these last few days of the contest!
+
+
+[05/30/2022 4:32 PM] acegawd
+@pooltypes @jimmyx0x i have msged both of you.
+
+
+[05/30/2022 8:02 PM] C4
+**🚨 CONTEST ALERT**
+
+@🐺wardens The **Velodrome** contest is now closed! Huge thanks to everyone who participated 🔍, whether you submitted a finding or not.
+
+What's next: the **Velodrome** team will review the findings over the next couple of days, and then we'll pass them off to the judge. Keep an eye on #📢announcements for regular updates on how the contest is progressing through awarding 🤑🏆, judging 🧑‍⚖️ and reporting 📜. Feel free to ping a gardener if you have questions along the way!
+
+
+[05/30/2022 8:12 PM] pooltypes#9360
+Hello everyone! Thank you all for participating in this contest. Our team truly appreciates each and every one of you for taking the time to review and surface any security risks in our code.
+
+{Reactions}
+hi5 (26) 
+
+[07/15/2022 8:17 PM] itsmetechjay
+🤑 🎉  Awards for **Velodrome Finance**:
+
+$11,638.43 USDC » @xiaoming90 
+$9,014.67 USDC » @Ruhum 
+$8,006.81 USDC » @smiling_heretic 
+$5,441.88 USDC » WatchPug (@JtP | WATCHPUG, @Ming | WATCHPUG)
+$5,064.40 USDC » @IllIllI 
+$4,284.66 USDC » @hyh 
+$4,249.00 USDC » @unforgiven 
+$3,943.87 USDC » @Rotcivegaf 
+$2,912.92 USDC » @kenzo 
+$2,247.98 USDC » @0x1f8b 
+$2,239.87 USDC » @hansfriese 
+$2,118.51 USDC » @cccz 
+$2,093.13 USDC » @Chom 
+$873.88 USDC » @codexploder 
+$848.64 USDC » @0x52 
+$675.52 USDC » @Picodes | Angle 
+$644.68 USDC » @0xNazgul 
+$516.55 USDC » @csanuragjain 
+$456.13 USDC » @p_crypt0 
+$454.22 USDC » @hake | SmartSek 
+$440.74 USDC » @MiloTruck 
+$343.25 USDC » @Dravee 
+$308.11 USDC » MaratCerby
+$294.82 USDC » @minhquanym 
+$232.42 USDC » @sashik_eth 
+$228.82 USDC » @horsefacts 
+$226.80 USDC » @Thunder 
+$219.59 USDC » @cryptphi 
+$214.82 USDC » @Funen 
+$189.42 USDC » @gzeon 
+$178.87 USDC » @Bernd 
+$165.18 USDC » @_Adam 
+$157.93 USDC » GimelSec (@rayn | GimelSec, @sces60107 | GimelSec)
+$157.85 USDC » @simon135 
+$153.83 USDC » @c3phas 
+$153.58 USDC » @teddav 
+$153.08 USDC » @TerrierLover 
+$151.80 USDC » @djxploit 
+$151.56 USDC » @catchup 
+$151.48 USDC » @Sloth 
+$151.42 USDC » @delfin454000 
+$151.40 USDC » @thinklab 
+$151.40 USDC » @sach1r0 
+$151.39 USDC » @fatherOfBlocks 
+$133.19 USDC » @lucyoa 
+$125.18 USDC » 0xf15ers (@remora0, @twojoy)
+$112.68 USDC » @0xNineDec 
+$112.68 USDC » Hawkeye (@0xwags, @0xmint)
+$112.68 USDC » @robee 
+$102.74 USDC » Nethermind (@mauricio1802, @dic0de, @dxdv, @Mr Unome, @visgoth , @thomaspanf , @kaliberpoziomka8552,@CalabashSquash,@Parth,@DestroyerSrt)
+$101.64 USDC » @jayjonah8 
+$101.32 USDC » @sorryNotsorry 
+$101.25 USDC » @BouSalman 
+$101.23 USDC » @Fufanuu 
+$101.23 USDC » CertoraInc (@egjlmn1 , @Ori Dabush, @ItayG, @shakedwinder)
+$101.23 USDC » @RoiEvenHaim 
+$101.23 USDC » @SooYa 
+$85.73 USDC » @supernova 
+$70.31 USDC » @anon 
+$65.59 USDC » @Waze 
+$56.57 USDC » @saian 
+$52.50 USDC » @madwookie 
+$52.50 USDC » @0xkatana 
+$52.50 USDC » @UnusualTurtle 
+$50.15 USDC » @ElKu 
+$50.15 USDC » DavidGialdi
+$50.15 USDC » @rfa 
+$50.15 USDC » @Tomio 
+$50.15 USDC » @TomJ 
+$50.15 USDC » @z3s 
+$49.95 USDC » @Deivitto 
+$49.95 USDC » @Fitraldys 
+$49.95 USDC » @orion 
+$49.95 USDC » @ControlCplusControlV 
+$49.95 USDC » @Randyyy 
+
+🏁 Findings summary 
+---------------------------
+High risk findings: 13 total, 6 unique
+Med risk findings: 42 total, 17 unique
+Gas optimization reports: 51
+QA reports: 50
+
+Awards will be distributed on Polygon within the next 1-2 weeks.  Congratulations all!  💸 💸 💸
+
+
+[07/15/2022 10:12 PM] rotcivegaf
+WOW!!!
+
+{Reactions}
+🎉 (12) 
+
+[07/27/2022 8:43 PM] 0xsmartcontract
+where is findings link in github?
+
+
+[07/27/2022 8:48 PM] cloudellie
+Still working on the report; will open the findings repo once the report is published.
+
+{Reactions}
+C4Keycap 
+
+==============================================================
+Exported 48 message(s)
+==============================================================
